@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nicolas.wheaterapp"
+    namespace = "com.nicolas.weatherapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nicolas.wheaterapp"
+        applicationId = "com.nicolas.weatherapp"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

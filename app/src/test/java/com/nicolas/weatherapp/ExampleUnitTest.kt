@@ -1,4 +1,4 @@
-package com.nicolas.wheaterapp
+package com.nicolas.weatherapp
 
 import org.junit.Test
 
