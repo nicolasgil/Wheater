@@ -1,6 +1,5 @@
 package com.nicolas.weatherapp.ui.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.nicolas.weatherapp.domain.models.Location
 import com.nicolas.weatherapp.domain.usecases.GetLocationsUseCase
 import com.nicolas.weatherapp.domain.usecases.SearchHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +22,9 @@ class WeatherSearchViewModel @Inject constructor(
 
     private val _recentSearches = MutableLiveData<List<Location>>()
     val recentSearches: LiveData<List<Location>> get() = _recentSearches
+
+    private val _selectedCityName = MutableLiveData<String>()
+    val selectedCityName: LiveData<String> get() = _selectedCityName
 
     init {
         loadRecentSearches()
@@ -41,6 +42,7 @@ class WeatherSearchViewModel @Inject constructor(
     }
 
     fun onSearchItemClicked(location: Location) {
+        _selectedCityName.value = location.name
         manageSearchHistoryUseCase.saveSearch(location)
         loadRecentSearches()
     }

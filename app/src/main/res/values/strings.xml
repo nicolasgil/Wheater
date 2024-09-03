@@ -3,4 +3,14 @@
 
     //SearchBar
     <string name="text_placeholder_bar_searchbar">Search</string>
+
+    //Components Visuals
+    <string name="text_list_products_empty_warning_elements_visuals">There are no location available.</string>
+    <string name="text_button_retry_elements_visuals">Retry</string>
+    <string name="text_button_accept_elements_visuals">Accept</string>
+    <string name="text_title_button_unexpected_error_elements_visuals">¡We sorry!</string>
+    <string name="text_body_button_unexpected_error_elements_visuals">An unexpected error has occurred.</string>
+
+    //Buttons
+    <string name="text_button_dialog_understood">Understood</string>
 </resources>

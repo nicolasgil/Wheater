@@ -1,8 +1,13 @@
 package com.nicolas.weatherapp.data.datasources.remote
 
 import android.util.Log
-import com.nicolas.weatherapp.data.datasources.remote.remotemodel.LocationRemoteResponse
+import com.nicolas.weatherapp.data.datasources.remote.remotemodel.ForecastResponse
+import com.nicolas.weatherapp.domain.models.Condition
+import com.nicolas.weatherapp.domain.models.Day
+import com.nicolas.weatherapp.domain.models.Forecast
+import com.nicolas.weatherapp.domain.models.ForecastDay
 import com.nicolas.weatherapp.domain.models.Location
+import com.nicolas.weatherapp.domain.models.WeatherForecast
 import javax.inject.Inject
 
 class LocationRemoteDataSourceImpl @Inject constructor(
@@ -22,12 +27,54 @@ class LocationRemoteDataSourceImpl @Inject constructor(
         }
     }
 
+    override suspend fun getDetailsLocation(cityName: String): WeatherForecast {
+        val defaultWeatherForecast = WeatherForecast(
+            location = Location(name = "", country = ""),
+            forecast = Forecast(
+                forecastday = emptyList()
+            )
+        )
 
-    private fun List<LocationRemoteResponse>.toDomainModel(): List<Location> =
+        return try {
+            val response =
+                locationService.getForecast(apiKey = apiKey, location = cityName, days = 2)
+            response.toWeatherForecast() ?: defaultWeatherForecast
+        } catch (e: Exception) {
+            Log.e("LocationRemoteData", "Error fetching remote locations", e)
+            defaultWeatherForecast
+        }
+    }
+
+
+    private fun List<ForecastResponse>.toDomainModel(): List<Location> =
         map { it.toDomainModel() }
 
-    private fun LocationRemoteResponse.toDomainModel(): Location =
+    private fun ForecastResponse.toDomainModel(): Location =
         Location(
-            name, country
+            location.name, location.country
         )
+
+    private fun ForecastResponse.toWeatherForecast(): WeatherForecast {
+        return WeatherForecast(
+            location = Location(
+                name = this.location.name,
+                country = this.location.country
+            ),
+            forecast = Forecast(
+                forecastday = this.forecast.forecastday.map { forecastDay ->
+                    ForecastDay(
+                        date = forecastDay.date,
+                        day = Day(
+                            avgtemp_c = forecastDay.day.avgtempC.toDouble(),
+                            condition = Condition(
+                                text = forecastDay.day.condition.text,
+                                icon = forecastDay.day.condition.icon
+                            )
+                        )
+                    )
+                }
+            )
+        )
+    }
+
 }
