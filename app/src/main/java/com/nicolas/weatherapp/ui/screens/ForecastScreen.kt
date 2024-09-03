@@ -35,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
+import com.nicolas.weatherapp.R
 import com.nicolas.weatherapp.domain.models.WeatherForecast
 import com.nicolas.weatherapp.ui.viewmodels.ForecastViewModel
 import com.nicolas.weatherapp.utils.dummyForecast
@@ -82,7 +84,7 @@ fun ForecastScreen(
             if (forecast != null) {
                 ForecastContent(forecast = forecast!!, navController = navController)
             } else {
-                Text("No forecast available.", color = Color.White)
+                Text(stringResource(R.string.text_no_forecast_available), color = Color.White)
             }
         }
     }
@@ -95,13 +97,18 @@ fun ForecastContent(forecast: WeatherForecast, navController: NavHostController)
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "Forecast for ${forecast.location.name}")
+                    Text(
+                        text = stringResource(
+                            R.string.text_title_top_bar_details,
+                            forecast.location.name
+                        )
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.text_description_content_back)
                         )
                     }
                 }
@@ -119,8 +126,13 @@ fun ForecastContent(forecast: WeatherForecast, navController: NavHostController)
                         .verticalScroll(rememberScrollState())
                         .padding(horizontal = 16.dp, vertical = 1.dp)
                 ) {
+
                     Text(
-                        text = "Forecast for ${forecast.location.name}, ${forecast.location.country}",
+                        text = stringResource(
+                            R.string.text_title_location_details_screen,
+                            forecast.location.name,
+                            forecast.location.country
+                        ),
                         style = TextStyle(
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
@@ -129,10 +141,18 @@ fun ForecastContent(forecast: WeatherForecast, navController: NavHostController)
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    forecast.forecast.forecastday.forEach { dayForecast ->
+                    WeatherDayCard(
+                        day = "Today",
+                        temp = "${String.format("%.1f", forecast.current.temp_c)}°C",
+                        iconUrl = forecast.current.condition.icon
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    forecast.forecast.forecastday.take(2).forEach { dayForecast ->
                         WeatherDayCard(
                             day = dayForecast.date,
-                            temp = "${dayForecast.day.avgtemp_c}°C",
+                            temp = "${String.format("%.1f", dayForecast.day.avgtemp_c)}°C",
                             iconUrl = dayForecast.day.condition.icon
                         )
 

@@ -3,6 +3,8 @@ package com.nicolas.weatherapp.data.repositories
 import android.util.Log
 import com.nicolas.weatherapp.data.datasources.local.SearchHistoryDataSource
 import com.nicolas.weatherapp.data.datasources.remote.RemoteDataSource
+import com.nicolas.weatherapp.domain.models.Condition
+import com.nicolas.weatherapp.domain.models.CurrentWeather
 import com.nicolas.weatherapp.domain.models.Forecast
 import com.nicolas.weatherapp.domain.models.Location
 import com.nicolas.weatherapp.domain.models.WeatherForecast
@@ -32,6 +34,7 @@ class LocationRepositoryImpl @Inject constructor(
             Log.e("LocationRemoteData", "Error fetching remote locations", e)
             WeatherForecast(
                 location = Location(name = "", country = ""),
+                current = CurrentWeather(0.0, Condition("", "")),
                 forecast = Forecast(
                     forecastday = emptyList()
                 )

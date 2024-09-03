@@ -19,9 +19,6 @@ class ForecastViewModel @Inject constructor(
     private val _detailsLocation = MutableLiveData<WeatherForecast>()
     val detailsLocation: LiveData<WeatherForecast> get() = _detailsLocation
 
-    init {
-
-    }
 
     fun loadForecast(cityName: String) {
         viewModelScope.launch {

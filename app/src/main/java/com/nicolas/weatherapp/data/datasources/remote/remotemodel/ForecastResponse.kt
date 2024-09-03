@@ -14,7 +14,7 @@ data class Location(
 )
 
 data class Current(
-    @SerializedName("temp_c") val tempC: Float,
+    @SerializedName("temp_c") val tempC: Double,
     @SerializedName("condition") val condition: Condition
 )
 
@@ -33,7 +33,7 @@ data class ForecastDay(
 )
 
 data class Day(
-    @SerializedName("avgtemp_c") val avgtempC: Float,
+    @SerializedName("avgtemp_c") val avgtempC: Double,
     @SerializedName("condition") val condition: Condition
 )
 

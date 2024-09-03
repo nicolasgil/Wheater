@@ -3,6 +3,7 @@ package com.nicolas.weatherapp.data.datasources.remote
 import android.util.Log
 import com.nicolas.weatherapp.data.datasources.remote.remotemodel.ForecastResponse
 import com.nicolas.weatherapp.domain.models.Condition
+import com.nicolas.weatherapp.domain.models.CurrentWeather
 import com.nicolas.weatherapp.domain.models.Day
 import com.nicolas.weatherapp.domain.models.Forecast
 import com.nicolas.weatherapp.domain.models.ForecastDay
@@ -30,6 +31,7 @@ class LocationRemoteDataSourceImpl @Inject constructor(
     override suspend fun getDetailsLocation(cityName: String): WeatherForecast {
         val defaultWeatherForecast = WeatherForecast(
             location = Location(name = "", country = ""),
+            current = CurrentWeather(0.0, Condition("", "")),
             forecast = Forecast(
                 forecastday = emptyList()
             )
@@ -37,7 +39,7 @@ class LocationRemoteDataSourceImpl @Inject constructor(
 
         return try {
             val response =
-                locationService.getForecast(apiKey = apiKey, location = cityName, days = 2)
+                locationService.getForecast(apiKey = apiKey, location = cityName, days = 3)
             response.toWeatherForecast() ?: defaultWeatherForecast
         } catch (e: Exception) {
             Log.e("LocationRemoteData", "Error fetching remote locations", e)
@@ -60,12 +62,19 @@ class LocationRemoteDataSourceImpl @Inject constructor(
                 name = this.location.name,
                 country = this.location.country
             ),
+            current = CurrentWeather(
+                temp_c = this.current.tempC,
+                condition = Condition(
+                    text = this.current.condition.text,
+                    icon = this.current.condition.icon
+                )
+            ),
             forecast = Forecast(
                 forecastday = this.forecast.forecastday.map { forecastDay ->
                     ForecastDay(
                         date = forecastDay.date,
                         day = Day(
-                            avgtemp_c = forecastDay.day.avgtempC.toDouble(),
+                            avgtemp_c = forecastDay.day.avgtempC,
                             condition = Condition(
                                 text = forecastDay.day.condition.text,
                                 icon = forecastDay.day.condition.icon
@@ -76,5 +85,6 @@ class LocationRemoteDataSourceImpl @Inject constructor(
             )
         )
     }
+
 
 }

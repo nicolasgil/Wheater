@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.gson.Gson
 import com.nicolas.weatherapp.R
 import com.nicolas.weatherapp.domain.models.Condition
+import com.nicolas.weatherapp.domain.models.CurrentWeather
 import com.nicolas.weatherapp.domain.models.Day
 import com.nicolas.weatherapp.domain.models.Forecast
 import com.nicolas.weatherapp.domain.models.ForecastDay
@@ -34,12 +35,19 @@ fun dummyNavController() = rememberNavController()
 
 val dummyForecast = WeatherForecast(
     location = Location(name = "New York", country = "USA"),
+    current = CurrentWeather(
+        temp_c = 22.555,
+        condition = Condition(
+            text = "Clear",
+            icon = "//cdn.weatherapi.com/weather/64x64/day/113.png"
+        )
+    ),
     forecast = Forecast(
         forecastday = listOf(
             ForecastDay(
                 date = "2024-09-01",
                 day = Day(
-                    avgtemp_c = 20.0,
+                    avgtemp_c = 20.4140,
                     condition = Condition(
                         text = "Sunny",
                         icon = "//cdn.weatherapi.com/weather/64x64/day/113.png"
@@ -49,7 +57,7 @@ val dummyForecast = WeatherForecast(
             ForecastDay(
                 date = "2024-09-02",
                 day = Day(
-                    avgtemp_c = 19.0,
+                    avgtemp_c = 19.111111111,
                     condition = Condition(
                         text = "Partly Cloudy",
                         icon = "//cdn.weatherapi.com/weather/64x64/day/116.png"
@@ -69,4 +77,3 @@ val dummyForecast = WeatherForecast(
         )
     )
 )
-
