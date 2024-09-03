@@ -11,9 +11,12 @@ data class Location(
     val country: String
 )
 
-data class CurrentWeather( 
+data class CurrentWeather(
     val temp_c: Double,
-    val condition: Condition
+    val condition: Condition,
+    val feelslike_c: Double,
+    val wind_mph: Double,
+    val humidity: Int
 )
 
 data class Forecast(
@@ -22,7 +25,8 @@ data class Forecast(
 
 data class ForecastDay(
     val date: String,
-    val day: Day
+    val day: Day,
+    val hour: List<Hour>
 )
 
 data class Day(
@@ -34,3 +38,10 @@ data class Condition(
     val text: String,
     val icon: String
 )
+
+data class Hour(
+    val time: String,
+    val temp_c: Double,
+    val condition: Condition
+)
+

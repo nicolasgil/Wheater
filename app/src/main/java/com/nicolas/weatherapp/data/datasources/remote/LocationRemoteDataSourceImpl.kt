@@ -7,8 +7,10 @@ import com.nicolas.weatherapp.domain.models.CurrentWeather
 import com.nicolas.weatherapp.domain.models.Day
 import com.nicolas.weatherapp.domain.models.Forecast
 import com.nicolas.weatherapp.domain.models.ForecastDay
+import com.nicolas.weatherapp.domain.models.Hour
 import com.nicolas.weatherapp.domain.models.Location
 import com.nicolas.weatherapp.domain.models.WeatherForecast
+import com.nicolas.weatherapp.utils.WeatherForecastObject
 import javax.inject.Inject
 
 class LocationRemoteDataSourceImpl @Inject constructor(
@@ -29,13 +31,7 @@ class LocationRemoteDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getDetailsLocation(cityName: String): WeatherForecast {
-        val defaultWeatherForecast = WeatherForecast(
-            location = Location(name = "", country = ""),
-            current = CurrentWeather(0.0, Condition("", "")),
-            forecast = Forecast(
-                forecastday = emptyList()
-            )
-        )
+        val defaultWeatherForecast = WeatherForecastObject.EMPTY
 
         return try {
             val response =
@@ -64,6 +60,9 @@ class LocationRemoteDataSourceImpl @Inject constructor(
             ),
             current = CurrentWeather(
                 temp_c = this.current.tempC,
+                feelslike_c = this.current.feelsLikeC,
+                wind_mph = this.current.windMph,
+                humidity = this.current.humidity,
                 condition = Condition(
                     text = this.current.condition.text,
                     icon = this.current.condition.icon
@@ -74,12 +73,22 @@ class LocationRemoteDataSourceImpl @Inject constructor(
                     ForecastDay(
                         date = forecastDay.date,
                         day = Day(
-                            avgtemp_c = forecastDay.day.avgtempC,
+                            avgtemp_c = forecastDay.day.avgTempC,
                             condition = Condition(
                                 text = forecastDay.day.condition.text,
                                 icon = forecastDay.day.condition.icon
                             )
-                        )
+                        ),
+                        hour = forecastDay.hour.map { hour ->
+                            Hour(
+                                time = hour.time,
+                                temp_c = hour.tempC,
+                                condition = Condition(
+                                    text = hour.condition.text,
+                                    icon = hour.condition.icon
+                                )
+                            )
+                        }
                     )
                 }
             )

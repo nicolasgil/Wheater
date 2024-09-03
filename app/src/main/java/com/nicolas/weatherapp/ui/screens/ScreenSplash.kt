@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -33,23 +32,19 @@ fun ScreenSplash(navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.teal_light))
-            .padding(16.dp),
+            .background(colorResource(id = R.color.light_blue)),
         contentAlignment = Alignment.Center
     ) {
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-
             Image(
                 painter = painterResource(id = R.drawable.ic_splash),
                 contentDescription = stringResource(R.string.app_name),
-                modifier = Modifier
-                    .size(350.dp)
-                    .padding(bottom = 16.dp)
+                modifier = Modifier.size(350.dp)
             )
-
 
             Text(
                 text = stringResource(R.string.app_name),
@@ -60,8 +55,7 @@ fun ScreenSplash(navController: NavHostController) {
         }
     }
 
-
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(Unit) {
         delay(3000)
         navController.popBackStack()
         navController.navigate(AppScreen.WeatherSearchScreen.route)
