@@ -24,7 +24,7 @@ class SearchHistoryDataSourceImpl @Inject constructor(
         recentSearches.add(location)
 
         if (recentSearches.size > 3) {
-            recentSearches.removeAt(0)
+            recentSearches.remove(recentSearches.first())
         }
 
         val json = gson.toJson(recentSearches)
