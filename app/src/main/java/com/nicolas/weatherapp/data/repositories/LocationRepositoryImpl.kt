@@ -13,8 +13,7 @@ class LocationRepositoryImpl @Inject constructor(
 
     override suspend fun getLocations(query: String): List<Location> {
         return try {
-            loadRecentSearches().takeIf { it.isNotEmpty() }
-                ?: remoteDataSource.getAllLocations(query)
+            remoteDataSource.getAllLocations(query)
         } catch (e: Exception) {
             Log.e("LocationRepositoryImpl", "Error fetching Locations", e)
             emptyList()
