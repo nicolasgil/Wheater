@@ -1,6 +1,7 @@
 package com.nicolas.weatherapp.data.datasources.remote
 
 import android.util.Log
+import com.nicolas.weatherapp.BuildConfig
 import com.nicolas.weatherapp.data.datasources.remote.remotemodel.ForecastResponse
 import com.nicolas.weatherapp.domain.models.Condition
 import com.nicolas.weatherapp.domain.models.CurrentWeather
@@ -17,7 +18,7 @@ class LocationRemoteDataSourceImpl @Inject constructor(
     private val locationService: LocationService,
 ) : RemoteDataSource {
 
-    private val apiKey = "de5553176da64306b86153651221606"
+    private val apiKey = BuildConfig.WEATHER_API_KEY
 
     override suspend fun getAllLocations(query: String): List<Location> {
 
