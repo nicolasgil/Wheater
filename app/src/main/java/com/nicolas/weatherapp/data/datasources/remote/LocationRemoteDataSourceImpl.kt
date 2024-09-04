@@ -43,15 +43,6 @@ class LocationRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-
-    private fun List<ForecastResponse>.toDomainModel(): List<Location> =
-        map { it.toDomainModel() }
-
-    private fun ForecastResponse.toDomainModel(): Location =
-        Location(
-            location.name, location.country
-        )
-
     private fun ForecastResponse.toWeatherForecast(): WeatherForecast {
         return WeatherForecast(
             location = Location(

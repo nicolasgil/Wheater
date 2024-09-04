@@ -52,13 +52,4 @@ class SearchHistoryDataSourceImpl @Inject constructor(
             country = this.country
         )
 
-
-    private fun List<Location>.toPersistenceModel(): List<SearchHistoryModel> =
-        map { it.toPersistenceModel() }
-
-    private fun Location.toPersistenceModel(): SearchHistoryModel =
-        SearchHistoryModel(
-            name = this.name,
-            country = this.country
-        )
 }

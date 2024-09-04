@@ -16,18 +16,6 @@ import com.nicolas.weatherapp.domain.models.Location
 import com.nicolas.weatherapp.domain.models.WeatherForecast
 
 
-fun String.toLocation(): Location {
-    return Gson().fromJson(this, Location::class.java)
-}
-
-@Composable
-fun dummyLocation(): List<Location> {
-    val mockProduct = LocalContext.current.resources.openRawResource(R.raw.mock_location)
-        .bufferedReader().use { it.readText() }
-
-    return List(3) { mockProduct.toLocation() }
-}
-
 @Composable
 fun dummyNavController() = rememberNavController()
 
