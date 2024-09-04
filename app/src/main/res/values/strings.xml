@@ -11,10 +11,13 @@
     <string name="text_button_dialog_understood">Understood</string>
 
     //Details Screen
-    <string name="text_title_top_bar_details">Forecast for %1$s</string>
+    <string name="text_title_top_bar_details">Forecast for %1$s, %2$s</string>
     <string name="text_description_content_back">Back</string>
-    <string name="text_title_location_details_screen">Location %1$s, %2$s</string>
     <string name="text_temp_details_screen">%1$s°C</string>
     <string name="text_no_forecast_available">No forecast available.</string>
     <string name="text_title_aver_tempe">Aver. Temp.</string>
+    <string name="text_title_tomorrow">Tomorrow</string>
+    <string name="text_title_day_after_tomorrow">Day After Tomorrow</string>
+    <string name="text_title_today">Today</string>
+    <string name="text_description_content_search">Icon Search</string>
 </resources>

@@ -2,10 +2,7 @@ package com.nicolas.weatherapp.utils
 
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
-import com.google.gson.Gson
-import com.nicolas.weatherapp.R
 import com.nicolas.weatherapp.domain.models.Condition
 import com.nicolas.weatherapp.domain.models.CurrentWeather
 import com.nicolas.weatherapp.domain.models.Day
@@ -118,7 +115,45 @@ data class WeatherForecastObject(
                                 )
                             )
                         )
-                    )
+                    ),
+                    ForecastDay(
+                        date = "2024-09-04",
+                        day = Day(
+                            avgtemp_c = 85.6,
+                            condition = Condition(
+                                text = "Sunny",
+                                icon = "//cdn.weatherapi.com/weather/64x64/day/113.png"
+                            )
+                        ),
+                        hour = listOf(
+                            Hour(
+                                time = "2024-09-03 00:00",
+                                temp_c = 24.5,
+                                condition = Condition(
+                                    text = "Clear",
+                                    icon = "//cdn.weatherapi.com/weather/64x64/night/113.png"
+                                )
+                            ),
+                            Hour(
+                                time = "2024-09-03 01:00",
+                                temp_c = 23.7,
+                                condition = Condition(
+                                    text = "Clear",
+                                    icon = "//cdn.weatherapi.com/weather/64x64/night/113.png"
+                                )
+                            ),
+                            Hour(
+                                time = "2024-09-03 02:00",
+                                temp_c = 22.9,
+                                condition = Condition(
+                                    text = "Clear",
+                                    icon = "//cdn.weatherapi.com/weather/64x64/night/113.png"
+                                )
+                            )
+                        )
+                    ),
+
+
                 )
             )
         )

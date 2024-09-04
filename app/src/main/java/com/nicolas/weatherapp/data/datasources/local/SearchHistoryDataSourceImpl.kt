@@ -21,15 +21,16 @@ class SearchHistoryDataSourceImpl @Inject constructor(
 
         recentSearches.remove(location)
 
-        recentSearches.add(location)
+        recentSearches.add(0, location)
 
         if (recentSearches.size > 3) {
-            recentSearches.remove(recentSearches.first())
+            recentSearches.removeLast()
         }
 
         val json = gson.toJson(recentSearches)
         sharedPreferences.edit().putString("recent_searches", json).apply()
     }
+
 
 
 

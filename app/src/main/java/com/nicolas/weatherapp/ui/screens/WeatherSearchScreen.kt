@@ -18,10 +18,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Surface
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -112,8 +115,17 @@ fun WeatherSearchContent(
     filteredCities: List<String>,
     onCityClick: (String) -> Unit
 ) {
-    Surface(
-        modifier = Modifier.fillMaxSize()
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.linearGradient(
+                    listOf(
+                        colorResource(id = R.color.light_blue),
+                        colorResource(id = R.color.white)
+                    )
+                )
+            )
     ) {
         Column(
             modifier = Modifier
@@ -126,21 +138,36 @@ fun WeatherSearchContent(
                 placeholder = {
                     Text(
                         stringResource(id = R.string.text_placeholder_bar_searchbar),
-                        color = colorResource(id = R.color.white),
+                        color = Color.Gray,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp
                     )
                 },
+                textStyle = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                ),
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .height(56.dp),
                 shape = RoundedCornerShape(8.dp),
                 colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = colorResource(id = R.color.sky_blue),
-                    cursorColor = Color.White,
-                    textColor = Color.White,
+                    backgroundColor = colorResource(id = R.color.white),
+                    cursorColor = Color.Black,
+                    textColor = Color.Black,
                     focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                )
+                    unfocusedIndicatorColor = Color.Transparent,
+                    placeholderColor = Color.Gray,
+                    leadingIconColor = Color.Black
+                ),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = stringResource(id = R.string.text_description_content_search),
+                        tint = colorResource(id = R.color.black)
+                    )
+                }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -199,7 +226,7 @@ fun WeatherSearchItem(cityName: String, onClick: () -> Unit) {
             .height(60.dp)
             .clickable { onClick() },
         shape = RoundedCornerShape(16.dp),
-        backgroundColor = colorResource(id = R.color.sky_blue)
+        backgroundColor = colorResource(id = R.color.deep_purple)
     ) {
         Box(
             modifier = Modifier
@@ -210,7 +237,7 @@ fun WeatherSearchItem(cityName: String, onClick: () -> Unit) {
                     spotColor = Color.Red
                 )
                 .background(
-                    color = colorResource(id = R.color.light_blue),
+                    color = colorResource(id = R.color.light_purple),
                     shape = RoundedCornerShape(6.dp)
                 )
                 .padding(16.dp)
@@ -233,7 +260,14 @@ fun Loading(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center,
         modifier = modifier
             .fillMaxSize()
-            .background(colorResource(id = R.color.sky_blue))
+            .background(
+                brush = Brush.linearGradient(
+                    listOf(
+                        colorResource(id = R.color.light_blue),
+                        colorResource(id = R.color.white)
+                    )
+                )
+            )
     ) {
         CircularProgressIndicator(
             modifier = Modifier.size(50.dp),
