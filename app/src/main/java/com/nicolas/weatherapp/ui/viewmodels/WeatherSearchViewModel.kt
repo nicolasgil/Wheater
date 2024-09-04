@@ -23,8 +23,6 @@ class WeatherSearchViewModel @Inject constructor(
     private val _recentSearches = MutableLiveData<List<Location>>()
     val recentSearches: LiveData<List<Location>> get() = _recentSearches
 
-    private val _selectedCityName = MutableLiveData<String>()
-    val selectedCityName: LiveData<String> get() = _selectedCityName
 
     init {
         loadRecentSearches()
@@ -42,7 +40,6 @@ class WeatherSearchViewModel @Inject constructor(
     }
 
     fun onSearchItemClicked(location: Location) {
-        _selectedCityName.value = location.name
         manageSearchHistoryUseCase.saveSearch(location)
         loadRecentSearches()
     }
