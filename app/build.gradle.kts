@@ -16,10 +16,16 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "WEATHER_API_KEY", "\"de5553176da64306b86153651221606\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
