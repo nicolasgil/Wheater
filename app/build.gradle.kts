@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.nicolas.wheaterapp"
+    namespace = "com.nicolas.weatherapp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.nicolas.wheaterapp"
+        applicationId = "com.nicolas.weatherapp"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
@@ -125,5 +125,10 @@ dependencies {
     testImplementation("app.cash.turbine:turbine:0.12.3")
     testImplementation("io.mockk:mockk:1.12.2")
     debugImplementation("androidx.compose.ui:ui-tooling")
+    testImplementation("org.robolectric:robolectric:4.9.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.21")
+
 }
