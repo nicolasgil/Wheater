@@ -125,5 +125,10 @@ dependencies {
     testImplementation("app.cash.turbine:turbine:0.12.3")
     testImplementation("io.mockk:mockk:1.12.2")
     debugImplementation("androidx.compose.ui:ui-tooling")
+    testImplementation("org.robolectric:robolectric:4.9.2")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.21")
+
 }
