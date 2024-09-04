@@ -1,7 +1,7 @@
 # **WeatherApp**
 
 ## Descripción:
-Esta aplicación Android, desarrollada en Kotlin con Compose, sigue los principios de Clean Architecture y utiliza la arquitectura MVVM, StateFlow, Retrofit, SharedPreferences y Coroutines para brindar una experiencia robusta y eficiente. La aplicación está diseñada para realizar consumos a internet y mostrar el clima de diferentes ciudades, permitiendo buscar ciudades y visualizar el pronóstico para los próximos días.
+WeatherApp es una aplicación Android desarrollada en Kotlin con Jetpack Compose, que sigue los principios de Clean Architecture y utiliza la arquitectura MVVM, Retrofit, SharedPreferences y Coroutines para proporcionar una experiencia eficiente y moderna. La aplicación consume una API de clima para mostrar el pronóstico actual y de los próximos días de varias ubicaciones alrededor del mundo. Permite realizar búsquedas dinámicas de ciudades, mostrando detalles detallados del clima, incluidos iconos visuales representando el estado del tiempo, como soleado, lluvioso o nublado.
 
 ## Características Principales:
 * **Clean Architecture**: La aplicación sigue los principios de Clean Architecture, lo que facilita la modularidad, el mantenimiento y la escalabilidad del código.
@@ -13,7 +13,7 @@ Esta aplicación Android, desarrollada en Kotlin con Compose, sigue los principi
 * **Pruebas Unitarias**: Se implementan pruebas unitarias utilizando JUnit junto con Mock y Mockito para verificar el comportamiento correcto de unidades individuales de código de manera aislada.
 
 ## Requisitos del Sistema
-Dispositivo con sistema operativo Android 7.0 (API nivel 24 | Android Nougat) o superior.
+Dispositivo con sistema operativo Android 5.0 (API nivel 21 | Android Lollipop) o superior.
 
 ## Instalación
 1. Clona el repositorio: `git clone https://github.com/nicolasgil/weather.git`
